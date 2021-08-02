@@ -20,9 +20,50 @@ namespace Fuel
     /// </summary>
     public partial class MainWindow : Window
     {
+        public FuelDB db;
+        public static List<Trip> TripsList;
+
         public MainWindow()
-        {
+        {    
             InitializeComponent();
+
+            TripsCount();
+            ReloadTrips();
+            
+        }
+
+        /// <summary>
+        /// Считаем количество записей в базе
+        /// </summary>
+        public static void TripsCount()
+        {
+            using (var db = new FuelDB())
+            {
+                var trips_count = db.Trips.Count();
+                MessageBox.Show(trips_count.ToString());
+            }
+        }
+
+        /// <summary>
+        /// Обновляем данные на главном окне
+        /// </summary>
+        private void ReloadTrips()
+        {
+            using (var db = new FuelDB())
+            {
+                TripsList = db.Trips.ToList();                
+                TripsGrid.ItemsSource = TripsList;
+            }            
+        }
+
+        /// <summary>
+        /// Добавляем новую запись в базу
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AddButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

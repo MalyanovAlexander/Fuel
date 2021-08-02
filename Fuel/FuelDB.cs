@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace Fuel
 {
-    class FuelDB : DbContext
+    public class FuelDB : DbContext
     {
+        public FuelDB(string ConnectionString) : base(ConnectionString) { }
+
+        public FuelDB() : this("name=FuelDB") { }
+        
         public DbSet<Trip> Trips { get; set; }
     }
 }

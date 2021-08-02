@@ -5,8 +5,66 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Fuel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="1024" Width="1280">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+       
+        <Grid>
+            <Button Grid.Column="4" 
+				Margin="5 0 5 0"
+				Name="AddButton"
+				Content="Добавить"
+				Click="AddButton_OnClick"/>
+        </Grid>
         
+        <DataGrid x:Name="TripsGrid"
+			   Grid.Row="1"
+			   Margin="5"
+			   AutoGenerateColumns="False"
+			   IsReadOnly="True"
+			   ItemsSource="{Binding TripsList}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" 
+							Width="auto" 
+							Binding="{Binding Id}" />
+                <DataGridTextColumn Header="Дата" 
+							Width="*" 
+							Binding="{Binding Date}" />
+                <DataGridTextColumn Header="Спидометр утро" 
+							Width="*" 
+							Binding="{Binding MileageMorning}" />
+                <DataGridTextColumn Header="Остаток топлива утром" 
+							Width="*" 
+							Binding="{Binding FuelMorning}" />
+                <DataGridTextColumn Header="Заправка" 
+							Width="*" 
+							Binding="{Binding Refueling}" />
+                <DataGridTextColumn Header="Пробег суточный" 
+							Width="*" 
+							Binding="{Binding MileagePerDay}" />
+                <DataGridTextColumn Header="Спидометр вечер" 
+							Width="*" 
+							Binding="{Binding MileageEvening}" />
+                <DataGridTextColumn Header="Остаток топлива вечером" 
+							Width="*" 
+							Binding="{Binding FuelEvening}" />
+                <DataGridTextColumn Header="Расход суточный" 
+							Width="*" 
+							Binding="{Binding DailyConsumption}" />
+                <DataGridTextColumn Header="Часы простоя" 
+							Width="*" 
+							Binding="{Binding IdleHours}" />
+                <DataGridTextColumn Header="Расход простоя" 
+							Width="*" 
+							Binding="{Binding IdleConsumption}" />
+                <DataGridTextColumn Header="Общий расход" 
+							Width="*" 
+							Binding="{Binding TotalConsumption}" />
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
+
 </Window>

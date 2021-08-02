@@ -10,7 +10,7 @@ namespace Fuel
 {
     class FuelDB : DbContext
     {
-
+        public DbSet<Trip> Trips { get; set; }
     }
 
     /// <summary>

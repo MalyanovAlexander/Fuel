@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Fuel
 {
+    /// <summary>
+    /// Класс контекста БД
+    /// </summary>
     public class FuelDB : DbContext
     {
         public FuelDB(string ConnectionString) : base(ConnectionString) { }

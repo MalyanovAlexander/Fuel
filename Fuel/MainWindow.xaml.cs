@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,16 +21,18 @@ namespace Fuel
     /// </summary>
     public partial class MainWindow : Window
     {
-        public FuelDB db;
         public static List<Trip> TripsList;
 
         public MainWindow()
-        {    
+        {
             InitializeComponent();
+
+            FuelDB db = new FuelDB();
+            db.Trips.Load();
+            TripsGrid.ItemsSource = db.Trips.Local.ToBindingList();
 
             TripsCount();
             ReloadTrips();
-            
         }
 
         /// <summary>
@@ -37,9 +40,9 @@ namespace Fuel
         /// </summary>
         public static void TripsCount()
         {
-            using (var db = new FuelDB())
+            using (FuelDB db = new FuelDB())
             {
-                var trips_count = db.Trips.Count();
+                int trips_count = db.Trips.Count();
                 MessageBox.Show(trips_count.ToString());
             }
         }
@@ -49,21 +52,34 @@ namespace Fuel
         /// </summary>
         private void ReloadTrips()
         {
-            using (var db = new FuelDB())
+            using (FuelDB db = new FuelDB())
             {
-                TripsList = db.Trips.ToList();                
+                TripsList = db.Trips.ToList();
                 TripsGrid.ItemsSource = TripsList;
-            }            
+            }
         }
 
         /// <summary>
-        /// Добавляем новую запись в базу
+        /// Окно для добавления новой записи в базу
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void AddButton_OnClick(object sender, RoutedEventArgs e)
+        private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            AddWindow addWindow = new AddWindow();
+            addWindow.Owner = this;
+
+            addWindow.Show();
+        }
+
+        /// <summary>
+        /// Обновить данные в таблице
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void RefreshButton_Click(object sender, RoutedEventArgs e)
+        {
+            ReloadTrips();
         }
     }
 }

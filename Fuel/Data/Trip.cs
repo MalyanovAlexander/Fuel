@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.ComponentModel.DataAnnotations;
 
 namespace Fuel
@@ -8,6 +9,7 @@ namespace Fuel
     /// </summary>
     public class Trip
     {
+        [Key]
         public int Id { get; set; }
 
         [Required]
@@ -23,7 +25,7 @@ namespace Fuel
         /// <summary>
         /// Остаток топлива утром
         /// </summary>
-        public double FuelMorning { get; set; }
+        public double FuelMorning { get; set; }        //double
 
         [Required]
         /// <summary>
@@ -45,7 +47,7 @@ namespace Fuel
         /// <summary>
         /// Остаток топлива вечером
         /// </summary>
-        public double FuelEvening { get; set; }
+        public double FuelEvening { get; set; }            //double
 
         /// <summary>
         /// Расход суточный
@@ -61,11 +63,11 @@ namespace Fuel
         /// <summary>
         /// Расход простоя
         /// </summary>
-        public double IdleConsumption { get; set; }
+        public double IdleConsumption { get; set; }        //double
 
         /// <summary>
         /// Общий расход
         /// </summary>
-        public double TotalConsumption { get; set; }
+        public double TotalConsumption { get; set; }       //double
     }
 }

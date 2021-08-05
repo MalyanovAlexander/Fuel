@@ -33,7 +33,7 @@ namespace Fuel
             TripsGrid.ItemsSource = db.Trips.Local.ToBindingList();
 
             //TripsCount();
-            ReloadTrips();
+            ReloadTripsGrid();
         }
 
         /// <summary>
@@ -51,7 +51,7 @@ namespace Fuel
         /// <summary>
         /// Обновляем данные на главном окне
         /// </summary>
-        private void ReloadTrips()
+        private void ReloadTripsGrid()
         {
             using (FuelDB db = new FuelDB())
             {
@@ -80,7 +80,7 @@ namespace Fuel
         /// <param name="e"></param>
         private void RefreshButton_Click(object sender, RoutedEventArgs e)
         {
-            ReloadTrips();
+            ReloadTripsGrid();
         }
 
         /// <summary>
@@ -96,14 +96,13 @@ namespace Fuel
                 .Where(o => o.Id == TripsGrid.SelectedIndex)
                 .FirstOrDefault();
 
-                db.Trips.Remove(trip);
                 db.SaveChanges();
-                ReloadTrips();              //Сразу обновим данные в TripsGrid
+                ReloadTripsGrid();              //Сразу обновим данные в TripsGrid
             }
         }
 
-        
-        
+
+
         private void TripsGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             //using (FuelDB db = new FuelDB())
@@ -114,7 +113,7 @@ namespace Fuel
 
             //    MessageBox.Show(trip.MileageMorning.ToString());
             //}
-            
+
             //FuelDB db = new FuelDB();
 
             //Trip trip = db.Trips
@@ -124,14 +123,12 @@ namespace Fuel
             //MessageBox.Show(trip.MileageMorning.ToString());
 
             //AddWindow addWindow = new AddWindow(trip);
-           
+
             //addWindow.Owner = this;
 
             //////addWindow.MileageMorning.Text = TripsGrid.Sele;
 
             //addWindow.Show();
         }
-
-        
     }
 }

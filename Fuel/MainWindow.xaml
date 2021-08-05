@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Fuel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1024" Width="1280">
+        Title="Путевка" Height="1024" Width="1280">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -22,6 +22,10 @@
                     Name="RefreshButton"
 				    Content="Обновить"
                     Click="RefreshButton_Click"/>
+                <Button
+                    Name="DeleteButton"
+				    Content="Удалить"
+                    Click="DeleteButton_Click"/>
             </WrapPanel>
             
         </Grid>
@@ -31,7 +35,8 @@
 			   Margin="5"
 			   AutoGenerateColumns="False"
 			   IsReadOnly="False"
-			   ItemsSource="{Binding TripsList}">
+			   ItemsSource="{Binding TripsList}"
+               MouseDoubleClick="TripsGrid_MouseDoubleClick">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="ID" Header="ID"
 							Width="auto" 

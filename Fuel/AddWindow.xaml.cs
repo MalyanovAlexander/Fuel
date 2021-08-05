@@ -21,12 +21,12 @@ namespace Fuel
     {
         public double summerconsumptionrate = 0.1444;
         public double winterconsumptionrate = 2.56;
-        public double idleconsumptionrate = 1.02;
-        
+        public double idleconsumptionrate = 1.02;        
+
         public AddWindow()
         {
             InitializeComponent();
-        }
+        }        
 
         /// <summary>
         /// Сохранить введённые данные

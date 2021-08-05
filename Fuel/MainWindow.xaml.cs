@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
@@ -31,7 +32,7 @@ namespace Fuel
             db.Trips.Load();
             TripsGrid.ItemsSource = db.Trips.Local.ToBindingList();
 
-            TripsCount();
+            //TripsCount();
             ReloadTrips();
         }
 
@@ -81,5 +82,56 @@ namespace Fuel
         {
             ReloadTrips();
         }
+
+        /// <summary>
+        /// Удаляем строку в таблице
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            using (FuelDB db = new FuelDB())
+            {
+                Trip trip = db.Trips
+                .Where(o => o.Id == TripsGrid.SelectedIndex)
+                .FirstOrDefault();
+
+                db.Trips.Remove(trip);
+                db.SaveChanges();
+                ReloadTrips();              //Сразу обновим данные в TripsGrid
+            }
+        }
+
+        
+        
+        private void TripsGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            //using (FuelDB db = new FuelDB())
+            //{
+            //    Trip trip = db.Trips
+            //    .Where(o => o.Id == TripsGrid.SelectedIndex)
+            //    .FirstOrDefault();
+
+            //    MessageBox.Show(trip.MileageMorning.ToString());
+            //}
+            
+            //FuelDB db = new FuelDB();
+
+            //Trip trip = db.Trips
+            //    .Where(o => o.Id == TripsGrid.SelectedIndex)
+            //    .FirstOrDefault();
+
+            //MessageBox.Show(trip.MileageMorning.ToString());
+
+            //AddWindow addWindow = new AddWindow(trip);
+           
+            //addWindow.Owner = this;
+
+            //////addWindow.MileageMorning.Text = TripsGrid.Sele;
+
+            //addWindow.Show();
+        }
+
+        
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Fuel.Services;
 using Fuel.ViewModel;
+using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -33,30 +34,6 @@ namespace Fuel
         }
 
         /// <summary>
-        /// Считаем количество записей в базе
-        /// </summary>
-        public static void TripsCount()
-        {
-            using (FuelDB db = new FuelDB())
-            {
-                int trips_count = db.Trips.Count();
-                MessageBox.Show(trips_count.ToString());
-            }
-        }
-
-        /// <summary>
-        /// Обновляем данные на главном окне
-        /// </summary>
-        private void ReloadTripsGrid()
-        {
-            using (FuelDB db = new FuelDB())
-            {
-                TripsList = db.Trips.ToList();
-                TripsGrid.ItemsSource = TripsList;
-            }
-        }
-
-        /// <summary>
         /// Окно для добавления новой записи в базу
         /// </summary>
         /// <param name="sender"></param>
@@ -69,14 +46,17 @@ namespace Fuel
             addWindow.Show();
         }
 
+
         /// <summary>
-        /// Обновить данные в таблице
+        /// Считаем количество записей в базе
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void RefreshButton_Click(object sender, RoutedEventArgs e)
+        public static void TripsCount()
         {
-            ReloadTripsGrid();
+            using (FuelDB db = new FuelDB())
+            {
+                int trips_count = db.Trips.Count();
+                MessageBox.Show(trips_count.ToString());
+            }
         }
 
         /// <summary>
@@ -90,17 +70,15 @@ namespace Fuel
             {
                 int id = TripsGrid.SelectedIndex;
 
-                Trip trip = db.Trips                    
+                Trip trip = db.Trips
                 .Where(o => o.Id == id)
                 .FirstOrDefault();
 
                 db.Trips.Remove(trip);
                 db.SaveChanges();
-                ReloadTripsGrid();              //Сразу обновим данные в TripsGrid
+                //ReloadTripsGrid();              //Сразу обновим данные в TripsGrid
             }
         }
-
-
 
         private void TripsGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {

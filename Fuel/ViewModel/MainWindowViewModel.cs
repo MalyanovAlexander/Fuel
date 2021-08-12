@@ -1,16 +1,32 @@
 ﻿using Fuel.Services;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 
 namespace Fuel.ViewModel
 {
-    public class MainWindowViewModel : ViewModelBase
+    public class MainWindowViewModel : ViewModelBase, INotifyPropertyChanged
     {
+        private TripsDataProvider _TripsProvider;
+
+        public ObservableCollection<Trip> Trips { get; } = new ObservableCollection<Trip>();
+
+        public MainWindowViewModel(TripsDataProvider TripsProvider)
+        {
+            _TripsProvider = TripsProvider;
+            RefreshData();
+
+            RefreshDataCommand = new RelayCommand(OnResreshDataCommandExecute, CanRefreshdataCommandExecute);
+        }
+
         #region Заголовок основного окна
 
         private string _WindowTitle = "Путевка";
@@ -23,18 +39,16 @@ namespace Fuel.ViewModel
 
         #endregion
 
+        #region Обновить данные в таблице
 
-        private TripsDataProvider _TripsProvider;
+        public ICommand RefreshDataCommand { get; }
 
-        public ObservableCollection<Trip> Trips { get; } = new ObservableCollection<Trip>();
+        private bool CanRefreshdataCommandExecute() => true;
 
-        public MainWindowViewModel(TripsDataProvider TripsProvider)
+        private void OnResreshDataCommandExecute()
         {
-            _TripsProvider = TripsProvider;
-
-            //RefreshData();
+            RefreshData();
         }
-
 
         /// <summary>
         /// Обновить данные в таблице
@@ -45,7 +59,8 @@ namespace Fuel.ViewModel
             Trips.Clear();
             foreach (Trip trip in _TripsProvider.GetTrips())
                 trips.Add(trip);
-
         }
+
+        #endregion
     }
 }

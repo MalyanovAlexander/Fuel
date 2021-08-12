@@ -23,7 +23,7 @@
                 <Button
                     Name="RefreshButton"
 				    Content="Обновить"
-                    Click="RefreshButton_Click"/>
+                    Command="{Binding RefreshDataCommand}"/>
                 <Button
                     Name="DeleteButton"
 				    Content="Удалить"

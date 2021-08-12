@@ -25,7 +25,7 @@ namespace Fuel
         /// <summary>
         /// Остаток топлива утром
         /// </summary>
-        public double FuelMorning { get; set; }        //double
+        public double FuelMorning { get; set; }
 
         [Required]
         /// <summary>
@@ -47,7 +47,7 @@ namespace Fuel
         /// <summary>
         /// Остаток топлива вечером
         /// </summary>
-        public double FuelEvening { get; set; }            //double
+        public double FuelEvening { get; set; }
 
         /// <summary>
         /// Расход суточный
@@ -63,11 +63,11 @@ namespace Fuel
         /// <summary>
         /// Расход простоя
         /// </summary>
-        public double IdleConsumption { get; set; }        //double
+        public double IdleConsumption { get; set; }
 
         /// <summary>
         /// Общий расход
         /// </summary>
-        public double TotalConsumption { get; set; }       //double
+        public double TotalConsumption { get; set; }
     }
 }

@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Fuel.Services;
+using Fuel.ViewModel;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
@@ -27,13 +30,6 @@ namespace Fuel
         public MainWindow()
         {
             InitializeComponent();
-
-            FuelDB db = new FuelDB();
-            db.Trips.Load();
-            TripsGrid.ItemsSource = db.Trips.Local.ToBindingList();
-
-            //TripsCount();
-            ReloadTripsGrid();
         }
 
         /// <summary>
@@ -92,10 +88,13 @@ namespace Fuel
         {
             using (FuelDB db = new FuelDB())
             {
-                Trip trip = db.Trips
-                .Where(o => o.Id == TripsGrid.SelectedIndex)
+                int id = TripsGrid.SelectedIndex;
+
+                Trip trip = db.Trips                    
+                .Where(o => o.Id == id)
                 .FirstOrDefault();
 
+                db.Trips.Remove(trip);
                 db.SaveChanges();
                 ReloadTripsGrid();              //Сразу обновим данные в TripsGrid
             }
@@ -105,14 +104,14 @@ namespace Fuel
 
         private void TripsGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            //using (FuelDB db = new FuelDB())
-            //{
-            //    Trip trip = db.Trips
-            //    .Where(o => o.Id == TripsGrid.SelectedIndex)
-            //    .FirstOrDefault();
+            using (FuelDB db = new FuelDB())
+            {
+                Trip trip = db.Trips
+                .Where(o => o.Id == TripsGrid.SelectedIndex)
+                .FirstOrDefault();
 
-            //    MessageBox.Show(trip.MileageMorning.ToString());
-            //}
+                MessageBox.Show(trip.MileageMorning.ToString());
+            }
 
             //FuelDB db = new FuelDB();
 

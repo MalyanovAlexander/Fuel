@@ -3,16 +3,18 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Fuel"
+        xmlns:viewmodel="clr-namespace:Fuel.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:MainWindowViewModel}"
         mc:Ignorable="d"
-        Title="Путевка" Height="1024" Width="1280">
+        Title="{Binding WindowTitle}" Height="1024" Width="1280"
+        DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition />
         </Grid.RowDefinitions>
        
-        <Grid>
+        <Grid
+            DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}">
             <WrapPanel>
                 <Button
                     Name="AddButton"
@@ -26,8 +28,7 @@
                     Name="DeleteButton"
 				    Content="Удалить"
                     Click="DeleteButton_Click"/>
-            </WrapPanel>
-            
+            </WrapPanel>            
         </Grid>
         
         <DataGrid x:Name="TripsGrid"
@@ -35,44 +36,33 @@
 			   Margin="5"
 			   AutoGenerateColumns="False"
 			   IsReadOnly="False"
-			   ItemsSource="{Binding TripsList}"
+               CanUserDeleteRows="True"
+			   ItemsSource="{Binding Trips}"
                MouseDoubleClick="TripsGrid_MouseDoubleClick">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="ID" Header="ID"
-							Width="auto" 
 							Binding="{Binding Id}" />
-                <DataGridTextColumn x:Name="Date" Header="Дата" 
-							Width="*" 
+                <DataGridTextColumn x:Name="Date" Header="Дата" 							 
 							Binding="{Binding Date, StringFormat=\{0:dd.MM.yy\}}" />
                 <DataGridTextColumn Header="Спидометр утро" 
-							Width="*" 
 							Binding="{Binding MileageMorning}" />
                 <DataGridTextColumn Header="Остаток топлива утром" 
-							Width="*" 
 							Binding="{Binding FuelMorning}" />
-                <DataGridTextColumn Header="Заправка" 
-							Width="*" 
+                <DataGridTextColumn Header="Заправка"							
 							Binding="{Binding Refueling}" />
-                <DataGridTextColumn Header="Пробег суточный" 
-							Width="*" 
+                <DataGridTextColumn Header="Пробег суточный"
 							Binding="{Binding MileagePerDay}" />
                 <DataGridTextColumn Header="Спидометр вечер" 
-							Width="*" 
 							Binding="{Binding MileageEvening}" />
                 <DataGridTextColumn Header="Остаток топлива вечером" 
-							Width="*" 
 							Binding="{Binding FuelEvening}" />
                 <DataGridTextColumn Header="Расход суточный" 
-							Width="*" 
 							Binding="{Binding DailyConsumption}" />
                 <DataGridTextColumn Header="Часы простоя" 
-							Width="*" 
 							Binding="{Binding IdleHours}" />
                 <DataGridTextColumn Header="Расход простоя" 
-							Width="*" 
 							Binding="{Binding IdleConsumption}" />
                 <DataGridTextColumn Header="Общий расход" 
-							Width="*" 
 							Binding="{Binding TotalConsumption}" />
             </DataGrid.Columns>
         </DataGrid>

@@ -19,7 +19,7 @@
                 <Button
                     Name="AddButton"
 				    Content="Добавить"
-				    Click="AddButton_Click"/>
+				    Command="{Binding AddWindowCommand}"/>
                 <Button
                     Name="RefreshButton"
 				    Content="Обновить"
@@ -27,7 +27,8 @@
                 <Button
                     Name="DeleteButton"
 				    Content="Удалить"
-                    Click="DeleteButton_Click"/>
+                    Command="{Binding DeleteDataCommand}"
+                    CommandParameter="{Binding ElementName=TripsGrid, Path=SelectedItem}"/>
             </WrapPanel>            
         </Grid>
         
@@ -38,7 +39,8 @@
 			   IsReadOnly="False"
                CanUserDeleteRows="True"
 			   ItemsSource="{Binding Trips}"
-               MouseDoubleClick="TripsGrid_MouseDoubleClick">
+               SelectedItem="{Binding SelectedTrip}"
+               CanUserAddRows="False">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="ID" Header="ID"
 							Binding="{Binding Id}" />

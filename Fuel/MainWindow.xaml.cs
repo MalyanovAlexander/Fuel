@@ -26,26 +26,12 @@ namespace Fuel
     /// </summary>
     public partial class MainWindow : Window
     {
-        public static List<Trip> TripsList;
+        public ObservableCollection<Trip> Trips { get; } = new ObservableCollection<Trip>();
 
         public MainWindow()
         {
             InitializeComponent();
         }
-
-        /// <summary>
-        /// Окно для добавления новой записи в базу
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void AddButton_Click(object sender, RoutedEventArgs e)
-        {
-            AddWindow addWindow = new AddWindow();
-            addWindow.Owner = this;
-
-            addWindow.Show();
-        }
-
 
         /// <summary>
         /// Считаем количество записей в базе
@@ -59,6 +45,11 @@ namespace Fuel
             }
         }
 
+
+
+
+
+
         /// <summary>
         /// Удаляем строку в таблице
         /// </summary>
@@ -66,30 +57,67 @@ namespace Fuel
         /// <param name="e"></param>
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
-            using (FuelDB db = new FuelDB())
+            //using (FuelDB db = new FuelDB())
+            //{
+            //    int id = TripsGrid.SelectedIndex;
+
+            //    Trip trip = db.Trips
+            //    .Where(o => o.Id == id)
+            //    .FirstOrDefault();
+
+            //    db.Trips.Remove(trip);
+            //    db.SaveChanges();
+            //    //ReloadTripsGrid();              //Сразу обновим данные в TripsGrid
+            //}     
+
+            //using (FuelDB db = new FuelDB())
+            //{
+            //    if (TripsGrid.SelectedItems != null && TripsGrid.SelectedItems.Count > 0)
+            //    {
+            //        List<Trip> toRemove = TripsGrid.SelectedItems.Cast<Trip>().ToList();
+            //        //Delete logic here
+            //        //...remove items from EF and save
+
+            //        //Once confirmed remove from items source
+            //        ObservableCollection<Trip> items = TripsGrid.ItemsSource as ObservableCollection<Trip>;
+            //        if (items != null)
+            //        {
+            //            foreach (var trip in toRemove)
+            //            {
+            //                TripsList.Remove(trip);
+            //                db.SaveChanges();
+            //            }
+            //        }
+            //    }
+            //}            
+
+            var trip = TripsGrid.SelectedItem;
+            DeleteData((Trip)trip);
+        }
+
+        private void DeleteData(Trip trip)
+        {
+            FuelDB db = new FuelDB();
+            if (db.Entry(trip).State == EntityState.Detached)
             {
-                int id = TripsGrid.SelectedIndex;
-
-                Trip trip = db.Trips
-                .Where(o => o.Id == id)
-                .FirstOrDefault();
-
-                db.Trips.Remove(trip);
-                db.SaveChanges();
-                //ReloadTripsGrid();              //Сразу обновим данные в TripsGrid
+                db.Trips.Attach(trip);
             }
+            db.Trips.Remove(trip);
+
+            db.SaveChanges();
+
         }
 
         private void TripsGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            using (FuelDB db = new FuelDB())
-            {
-                Trip trip = db.Trips
-                .Where(o => o.Id == TripsGrid.SelectedIndex)
-                .FirstOrDefault();
+        {            
+            //using (FuelDB db = new FuelDB())
+            //{
+            //    Trip trip = db.Trips
+            //    .Where(o => o.Id == TripsGrid.SelectedIndex)
+            //    .FirstOrDefault();
 
-                MessageBox.Show(trip.MileageMorning.ToString());
-            }
+            //    MessageBox.Show(trip.MileageMorning.ToString());
+            //}
 
             //FuelDB db = new FuelDB();
 

@@ -21,12 +21,14 @@ namespace Fuel.ViewModel
             ServiceLocator.SetLocatorProvider(() => services);
 
             SimpleIoc.Default.Register<MainWindowViewModel>();
+            SimpleIoc.Default.Register<AddWindowViewModel>();
 
             services.Register<TripsDataProvider>();
             services.Register(() => new FuelDB());
         }
 
         public MainWindowViewModel MainWindowModel => ServiceLocator.Current.GetInstance<MainWindowViewModel>();
+        public AddWindowViewModel AddWindowModel => ServiceLocator.Current.GetInstance<AddWindowViewModel>();
 
         public static void Cleanup()
         {

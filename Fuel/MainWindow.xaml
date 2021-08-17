@@ -13,13 +13,12 @@
             <RowDefinition />
         </Grid.RowDefinitions>
        
-        <Grid
-            DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}">
+        <Grid>
             <WrapPanel>
                 <Button
                     Name="AddButton"
 				    Content="Добавить"
-				    Command="{Binding AddWindowCommand}"/>
+                    Command="{Binding AddWindowCommand}"/>                
                 <Button
                     Name="RefreshButton"
 				    Content="Обновить"

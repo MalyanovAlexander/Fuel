@@ -20,9 +20,7 @@ namespace Fuel.ViewModel
 
         public ObservableCollection<Trip> Trips { get; } = new ObservableCollection<Trip>();
 
-        public Trip SelectedTrip{get; set;}
-
-        //private var MWSelectedItem;
+        public Trip SelectedTrip { get; set; }
 
         public MainWindowViewModel(TripsDataProvider TripsProvider)
         {
@@ -32,7 +30,6 @@ namespace Fuel.ViewModel
             RefreshDataCommand = new RelayCommand(OnResreshDataCommandExecute, CanRefreshDataCommandExecute);
             AddWindowCommand = new RelayCommand(OnAddWindowCommandExecute, CanAddWindowCommandExecute);
             DeleteDataCommand = new RelayCommand(OnDeleteDataCommandExecute, CanDeleteDataCommandExecute);
-
         }
 
         #region Заголовок основного окна
@@ -71,7 +68,7 @@ namespace Fuel.ViewModel
 
         #endregion
 
-        #region Открыть окно для добавления новой записи в базу
+        #region Открыть окно для добавления новой записи в БД
 
         public ICommand AddWindowCommand { get; }
 
@@ -94,7 +91,7 @@ namespace Fuel.ViewModel
 
         #endregion
 
-        #region Удалить строку в таблице
+        #region Удалить строку в БД
 
         public ICommand DeleteDataCommand { get;}
 

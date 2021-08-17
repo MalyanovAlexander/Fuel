@@ -88,6 +88,7 @@
     </Compile>
     <Compile Include="Data\Trip.cs" />
     <Compile Include="Services\TripsDataProvider.cs" />
+    <Compile Include="ViewModel\AddWindowViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="AddWindow.xaml">

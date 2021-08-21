@@ -13,7 +13,10 @@ namespace Fuel
     {
         public FuelDB(string ConnectionString) : base(ConnectionString) { }
 
-        public FuelDB() : this("name=FuelDB") { }
+        public FuelDB() : this("name=FuelDB")
+        {
+            Database.SetInitializer(new CreateDatabaseIfNotExists<FuelDB>());
+        }
 
         public DbSet<Trip> Trips { get; set; }
     }

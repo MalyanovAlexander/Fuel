@@ -26,7 +26,7 @@
                 <TextBlock Grid.Row="0" Grid.Column="0" Text="Дата"/>
                 <DatePicker x:Name="Date" Grid.Row="0" Grid.Column="1" SelectedDate="{Binding Path=date}"/>                
                 <TextBlock Grid.Row="1" Grid.Column="0" Text="Спидометр утро"/>
-                <TextBox Grid.Row="1" Grid.Column="1" Name="MileageMorning" Text="{Binding Path=mileagemorning}" GotFocus="TextBox_GotFocus"/>
+                <TextBox Grid.Row="1" Grid.Column="1" Name="MileageMorning" Text="{Binding Path=mileagemorning}"  GotFocus="TextBox_GotFocus"/>
                 <TextBlock Grid.Row="2" Grid.Column="0" Text="Остаток топлива утром"/>
                 <TextBox Grid.Row="2" Grid.Column="1" Name="FuelMorning" Text="{Binding Path=fuelmorning}" GotFocus="TextBox_GotFocus"/>
                 <TextBlock Grid.Row="3" Grid.Column="0" Text="Заправка"/>

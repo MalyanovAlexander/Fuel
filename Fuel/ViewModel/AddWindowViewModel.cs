@@ -14,11 +14,11 @@ namespace Fuel.ViewModel
     public class AddWindowViewModel : ViewModelBase
     {
         private TripsDataProvider _TripsProvider;
-        public string mileagemorning { get; set; }
-        public string fuelmorning { get; set; }
-        public string refueling { get; set; }
-        public string mileageperday { get; set; }
-        public string idlehours { get; set; }
+        public int mileagemorning { get; set; }
+        public double fuelmorning { get; set; }
+        public int refueling { get; set; }
+        public int mileageperday { get; set; }
+        public int idlehours { get; set; }
         public string consumptionrate { get; set; }
         private double idleconsumptionrate = 1.02;
         private double summerconsumptionrate = 0.1444;
@@ -51,11 +51,11 @@ namespace Fuel.ViewModel
         {
             using (FuelDB db = new FuelDB())
             {
-                int _mileagemorning = int.Parse(mileagemorning);           //Здесь получаем данные из текстбоксов и конвертим в числовые
-                double _fuelmorning = double.Parse(fuelmorning);
-                int _refueling = int.Parse(refueling);
-                int _mileageperday = int.Parse(mileageperday);
-                int _idlehours = int.Parse(idlehours);
+                int _mileagemorning = mileagemorning;                           //Здесь получаем данные из текстбоксов, проводим расчёты
+                double _fuelmorning = fuelmorning;
+                int _refueling = refueling;
+                int _mileageperday = mileageperday;
+                int _idlehours = idlehours;
                 double _idleconsumption = _idlehours * idleconsumptionrate;
                 double _dailyconsumption;                                       //Расчёт дневного расхода в зависимости от выбранной нормы расхода (лето\зима)
                 DateTime date = _date;

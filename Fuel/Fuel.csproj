@@ -102,6 +102,10 @@
       <DependentUpon>AddWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Data\Trip.cs" />
+    <Compile Include="Migrations\202108211005259_Initial.cs" />
+    <Compile Include="Migrations\202108211005259_Initial.designer.cs">
+      <DependentUpon>202108211005259_Initial.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Services\TripsDataProvider.cs" />
     <Compile Include="ViewModel\AddWindowViewModel.cs" />
@@ -139,6 +143,9 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Migrations\202108211005259_Initial.resx">
+      <DependentUpon>202108211005259_Initial.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

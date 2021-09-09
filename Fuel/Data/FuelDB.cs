@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Fuel.Migrations;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
@@ -13,9 +14,11 @@ namespace Fuel
     {
         public FuelDB(string ConnectionString) : base(ConnectionString) { }
 
-        public FuelDB() : this("name=FuelDB")
+        public FuelDB() : this("name=FuelDB") { }
+
+        static FuelDB()
         {
-            Database.SetInitializer(new CreateDatabaseIfNotExists<FuelDB>());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<FuelDB, Configuration>());
         }
 
         public DbSet<Trip> Trips { get; set; }

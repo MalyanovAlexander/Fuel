@@ -42,6 +42,6 @@ namespace Fuel
             TextBox textBox = (TextBox)sender;
             if (textBox.Text == null) return;
             textBox.Dispatcher.BeginInvoke(new Action(() => textBox.SelectAll()));
-        }
+        }              
     }
 }

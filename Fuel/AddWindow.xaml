@@ -25,8 +25,8 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Row="0" Grid.Column="0" Text="Дата"/>
                 <DatePicker x:Name="Date" Grid.Row="0" Grid.Column="1" SelectedDate="{Binding Path=date}"/>                
-                <TextBlock Grid.Row="1" Grid.Column="0" Text="Спидометр утро"/>
-                <TextBox Grid.Row="1" Grid.Column="1" Name="MileageMorning" Text="{Binding Path=mileagemorning}"  GotFocus="TextBox_GotFocus"/>
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Спидометр утро"/>                
+                <TextBox Grid.Row="1" Grid.Column="1" Name="MileageMorning" Text="{Binding Path=mileagemorning, NotifyOnValidationError=True}" GotFocus="TextBox_GotFocus"/>
                 <TextBlock Grid.Row="2" Grid.Column="0" Text="Остаток топлива утром"/>
                 <TextBox Grid.Row="2" Grid.Column="1" Name="FuelMorning" Text="{Binding Path=fuelmorning}" GotFocus="TextBox_GotFocus"/>
                 <TextBlock Grid.Row="3" Grid.Column="0" Text="Заправка"/>
@@ -36,7 +36,7 @@
                 <TextBlock Grid.Row="5" Grid.Column="0" Text="Часы простоя"/>
                 <TextBox Grid.Row="5" Grid.Column="1" Name="IdleHours" Text="{Binding Path=idlehours}" GotFocus="TextBox_GotFocus"/>
                 <TextBlock Grid.Row="6" Grid.Column="0" Text="Норма расхода"/>
-                <ComboBox x:Name="cmbbx_ConsumptionRate" Grid.Row="6" Grid.Column="1" Text="{Binding Path=consumptionrate}">
+                <ComboBox x:Name="cmbbx_ConsumptionRate" Grid.Row="6" Grid.Column="1" Text="{Binding Path=consumptionrate}" SelectedIndex="0">
                     <TextBlock>Летняя норма</TextBlock>
                     <TextBlock>Зимняя норма</TextBlock>
                 </ComboBox>
@@ -48,12 +48,48 @@
                     Height="auto" 
                     Width="auto" 
                     Content="Сохранить"
-                    Command="{Binding SaveDataCommand}"/>
+                    Command="{Binding SaveDataCommand}">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="IsEnabled" Value="False"/>
+                            <Style.Triggers>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=MileageMorning}" Value="False"/>
+                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=FuelMorning}" Value="False"/>
+                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=Refueling}" Value="False"/>
+                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=MileagePerDay}" Value="False"/>
+                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IdleHours}" Value="False"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter Property="IsEnabled" Value="True"/>
+                                </MultiDataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
                 <Button 
                     Name="SaveExitButton" 
                     Height="auto" 
                     Width="auto" 
-                    Content="Сохранить и выйти"/>
+                    Content="Сохранить и выйти">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="IsEnabled" Value="False"/>
+                            <Style.Triggers>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=MileageMorning}" Value="False"/>
+                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=FuelMorning}" Value="False"/>
+                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=Refueling}" Value="False"/>
+                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=MileagePerDay}" Value="False"/>
+                                        <Condition Binding="{Binding Path=(Validation.HasError), ElementName=IdleHours}" Value="False"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <Setter Property="IsEnabled" Value="True"/>
+                                </MultiDataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
             </WrapPanel>
         </StackPanel>
     </Grid>

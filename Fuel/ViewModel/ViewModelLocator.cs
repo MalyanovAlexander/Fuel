@@ -20,8 +20,8 @@ namespace Fuel.ViewModel
             SimpleIoc services = SimpleIoc.Default;
             ServiceLocator.SetLocatorProvider(() => services);
 
-            SimpleIoc.Default.Register<MainWindowViewModel>();
-            SimpleIoc.Default.Register<AddWindowViewModel>();
+            services.Register<MainWindowViewModel>();
+            services.Register<AddWindowViewModel>();
 
             services.Register<TripsDataProvider>();
             services.Register(() => new FuelDB());

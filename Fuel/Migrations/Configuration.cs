@@ -5,7 +5,7 @@
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Fuel.FuelDB>
+    internal sealed class Configuration : DbMigrationsConfiguration<FuelDB>
     {
         public Configuration()
         {
